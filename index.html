@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>History by Month & Year</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="container">
+    <h1>History by Month & Year</h1>
+    <p class="tagline">Select a month and year to explore key events, copy/download results, and quiz yourself.</p>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>Search</h2>
+      <form id="controls" class="controls" onsubmit="return false;">
+        <label>
+          Month
+          <select id="monthSelect" aria-label="Select month">
+            <option value="">Any</option>
+          </select>
+        </label>
+
+        <label>
+          Year
+          <input id="yearInput" type="number" inputmode="numeric" placeholder="e.g., 1947" aria-label="Enter year" />
+        </label>
+
+        <div class="actions">
+          <button id="btnSearch" class="btn primary">Search</button>
+          <button id="btnClear" type="button" class="btn">Clear</button>
+          <button id="btnRandom" type="button" class="btn">Random Month/Year</button>
+        </div>
+
+        <div class="view-toggle" role="tablist" aria-label="View toggle">
+          <button id="tabList" class="tab active" role="tab" aria-selected="true">List</button>
+          <button id="tabTimeline" class="tab" role="tab" aria-selected="false">Timeline</button>
+          <button id="tabQuiz" class="tab" role="tab" aria-selected="false">Quiz</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="card" id="resultsCard" aria-live="polite">
+      <div class="card-header">
+        <h2 id="resultsTitle">Results</h2>
+        <div class="right">
+          <button id="btnCopy" class="btn small">Copy</button>
+          <div class="menu">
+            <button class="btn small" id="btnDownload">Download ▼</button>
+            <div class="menu-items" id="downloadMenu" hidden>
+              <button data-format="txt">TXT</button>
+              <button data-format="csv">CSV</button>
+              <button data-format="json">JSON</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LIST VIEW -->
+      <ol id="results" class="results-list" aria-label="Events list"></ol>
+
+      <!-- TIMELINE VIEW -->
+      <div id="timeline" class="timeline" hidden></div>
+
+      <!-- QUIZ VIEW -->
+      <div id="quiz" class="quiz" hidden>
+        <div class="quiz-head">
+          <div id="quizMeta"></div>
+          <div>
+            <label>Questions:
+              <select id="quizCount"></select>
+            </label>
+            <button id="startQuiz" class="btn primary">Start Quiz</button>
+          </div>
+        </div>
+        <div id="quizArea"></div>
+        <div id="quizFooter" class="quiz-footer" hidden>
+          <button id="submitQuiz" class="btn primary">Submit</button>
+          <button id="resetQuiz" class="btn">Reset</button>
+          <span id="quizScore" class="score"></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="card subtle">
+      <details>
+        <summary>About the data (click to expand)</summary>
+        <p>
+          Events are stored locally in <code>data/events.json</code> and include day (if known), month, year, title, and a concise description.
+          You can extend this file with more entries following the same schema.
+        </p>
+      </details>
+    </section>
+  </main>
+
+  <footer class="container footer">
+    <small>© <span id="yearNow"></span> History by Month & Year — offline-friendly.</small>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+  </html>
